@@ -92,6 +92,7 @@
 - Backpack
 - Greatsword
 - Bow and Arrows
+
 </details>
 
 <!-- NPCs SECTION -->
@@ -103,3 +104,23 @@
 - ### Merchant
 - ### Fortune Teller
 </details>
+
+> [!NOTE]
+>
+> # ToDo LIST
+>
+> 1. [ ] Character Creation
+> 1. [ ] Saving Files
+>    1. [ ] Character
+>    1. [ ] Map and rooms
+>    1. [ ] Stats
+>    1. [ ] Mobs
+> 1. [ ] Map Creation
+> 1. [ ] Movement Development
+> 1. [ ] WIN conditions
+> 1. [ ] Mob Creation
+> 1. [ ] Character Stats
+> 1. [ ] Fight Development
+>    1. [ ] Elements
+>    1. [ ] Ultimate
+> 1. [ ] LOSE conditions
