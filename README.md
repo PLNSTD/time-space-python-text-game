@@ -6,6 +6,10 @@
 >
 > - [ ] Create various rooms with different weather conditions.
 > - [ ] Attack system: elemental cards
+>   - Elements: Physic, Fire, Ice and Light
+>   - Random card choice with better chances at higher levels of magic
+>   - Mana points for elemental cards, not for physic attacks
+>   - ULTIMATE _**I chose my destiny**_: grants card choice 1 time per room
 > - [ ] Enemies drops: coins and xp
 > - [ ] Character Skills: Health, magic, agility and speech
 
@@ -79,7 +83,7 @@
 
 <!-- NPCs SECTION -->
 <details>
-<summary>NPC</summary>
+<summary>NPCs</summary>
 
 ## NPCs
 
