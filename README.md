@@ -109,6 +109,7 @@
 >
 > # ToDo LIST
 >
+> 1. [ ] Virtual environment Creation
 > 1. [ ] Character Creation
 > 1. [ ] Saving Files
 >    1. [ ] Character
