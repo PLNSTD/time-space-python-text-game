@@ -1,39 +1,67 @@
-# time-space-python-text-game
+# **time-space-python-text-game**
 
-## Idea:
+> [!NOTE]
+> Create various rooms with different weather conditions.
 
-Create various rooms with different weather conditions.
+<!-- CONTENT SECTION -->
+
+## Contents
+
+[Rooms](#rooms) -
+[Main Character](#main-character) -
+[Enemies](#enemies) -
+[Items](#items) -
+[NPCs](#npcs)
+
+<!-- ROOMS SECTION-->
+<details>
+<summary>Rooms</summary>
 
 # Rooms
 
-- ## START:
-- ## END:
-  - Opened by condition (key, lever or RoomClear)
-- ## GENERAL:
-  - ### Snow:
-  - ### Sand:
-  - ### Oasis:
-    - NPCs: Merchant and Fortune Teller
-  - ### Empty room:
-    - NPCs: Merchant
+- [ ] START:
+- [ ] END:
+  - [ ] Opened by condition (key, lever or RoomClear)
+- [ ] GENERAL:
+  - [ ] Snow:
+  - [ ] Sand:
+  - [ ] Oasis:
+  - NPCs: [Merchant](#merchant) and [Fortune Teller](#fortuneteller)
+  - [ ] Empty room:
+  - NPCs: Merchant
+  </details>
 
-# Main Character
+<!-- CHARACTER SECTION -->
+<details>
+<summary>Main Character</summary>
 
-- ## Stats
-  - Given points initially 5
-  - ### Health (1-5)
-  - ### Agility (1-5)
-  - ### Combat (1-5)
-  - ### Speech (1-3)
+## Main Character
 
-# Enemies
+- Stats
+- Given points initially 5
+- Health (1-5)
+- Agility (1-5)
+- Combat (1-5)
+- Speech (1-3)
+</details>
+
+<!-- ENEMIES SECTION -->
+<details>
+<summary>Enemies</summary>
+
+## Enemies
 
 - Bandits
 - Skeletons
 - Ice monsters (weak to fire)
 - Zombies (blind)
+</details>
 
-# Items
+<!-- ITEMS SECTION -->
+<details>
+<summary>Items</summary>
+
+## Items
 
 - Torch
 - Sword
@@ -41,8 +69,14 @@ Create various rooms with different weather conditions.
 - Backpack
 - Greatsword
 - Bow and Arrows
+</details>
 
-# NPC
+<!-- NPCs SECTION -->
+<details>
+<summary>NPC</summary>
 
-- ## Merchant
-- ## Fortune Teller
+## NPCs
+
+- ### Merchant
+- ### Fortune Teller
+</details>
