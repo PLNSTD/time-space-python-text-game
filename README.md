@@ -1,7 +1,13 @@
 # **time-space-python-text-game**
 
 > [!NOTE]
-> Create various rooms with different weather conditions.
+>
+> # Ideas
+>
+> - [ ] Create various rooms with different weather conditions.
+> - [ ] Attack system: elemental cards
+> - [ ] Enemies drops: coins and xp
+> - [ ] Character Skills: Health, magic, agility and speech
 
 <!-- CONTENT SECTION -->
 
