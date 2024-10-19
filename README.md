@@ -13,6 +13,8 @@
 > - [ ] Enemies drops: coins and xp
 > - [ ] Character Skills: Health, magic, agility and speech
 
+> [!WARNING] > [ ] Need to balance mob weaknesses and resistances
+
 <!-- CONTENT SECTION -->
 
 ## Contents
@@ -47,12 +49,15 @@
 
 ## Main Character
 
-- Stats
-- Given points initially 5
-- Health (1-5)
-- Agility (1-5)
-- Combat (1-5)
-- Speech (1-3)
+### Stats
+
+> Given points initially 5
+
+- Health (1-5): 5 life points pr/upgrade
+- Agility (1-3): Enchances chances of avoid attacks and getting off fights
+- Magic (1-5): Increases chances of card choice
+- Speech (1-3): Increases chances on trading and conversations with NPCs
+
 </details>
 
 <!-- ENEMIES SECTION -->
@@ -62,10 +67,18 @@
 ## Enemies
 
 - Bandits
+  - **Weaknesses**: Fire
+  - **Resistances**: Light
 - Skeletons
-- Ice monsters (weak to fire)
-- Zombies (blind)
-</details>
+  - **Weaknesses**: Light
+  - **Resistances**: Physic
+- Ice monsters
+  - **Weaknesses**: Fire
+  - **Resistances**: Ice, Physic
+- Zombies
+  - **Weaknesses**: Fire
+  - **Resistances**: None
+  </details>
 
 <!-- ITEMS SECTION -->
 <details>
