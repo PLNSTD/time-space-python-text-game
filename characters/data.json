@@ -19,6 +19,26 @@
                 "magic": 1,
                 "speech": 1
             }
+        },
+        "Peppe": {
+            "name": "Peppe",
+            "level": 1,
+            "skills": {
+                "health": 1,
+                "agility": 1,
+                "magic": 1,
+                "speech": 1
+            }
+        },
+        "Fippe": {
+            "name": "Fippe",
+            "level": 1,
+            "skills": {
+                "health": 1,
+                "agility": 1,
+                "magic": 1,
+                "speech": 1
+            }
         }
     }
 }
