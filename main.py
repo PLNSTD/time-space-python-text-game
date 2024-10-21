@@ -1,3 +1,3 @@
-import characters.profiles as mc
+import game_center
 
-mc.get_characters()
+game_center.Game()
