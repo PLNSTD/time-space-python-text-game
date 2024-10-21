@@ -3,6 +3,8 @@ import os
 import json
 import time
 
+profiles_dic = {}
+
 def Game():
     while True:
         print('Welcome to TimeSpace!\n\n')
@@ -32,16 +34,19 @@ def start():
         prompt_clear()   
 
 def load_characters():
+    global profiles_dic
     profiles_dic = mc.load_profiles()
     if len(profiles_dic) == 0:
         print('No characters created... Start a New Game to create one')
         print('Returning to Main Menu')
         time.sleep(3.5)
         return
-    while True:
+    while len(profiles_dic) > 0:
         print('Select a character\n')
+
         for profile in enumerate(profiles_dic):
             print(f'\n{profile[0] + 1} - Name: {profile[1]}\n\tLv: {profiles_dic[profile[1]].get('level')}')
+
         print('\n0 - Return to Main Menu')
         user_choice = int(input('\nYour choice: '))
         if user_choice == 0:
@@ -56,6 +61,7 @@ def load_characters():
         prompt_clear()
 
 def character_option(character_dic):
+    global profiles_dic
     while True:
         print(f'You have chosen:\n{character_dic['name']}\nLv: {character_dic['level']}')
         print('\nPress a key:')
@@ -68,12 +74,12 @@ def character_option(character_dic):
             pass
         elif user_choice == 2: # DELETE THIS CHARACTER
             prompt_clear()
-            pass
+            profiles_dic = mc.delete_character(character_dic['name'])
+            break
         elif user_choice == 0: # GO BACK
             prompt_clear()
             break
         prompt_clear()
-
 
 def prompt_clear():
     os.system('cls' if os.name == 'nt' else 'clear')

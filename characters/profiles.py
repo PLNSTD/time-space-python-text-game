@@ -13,7 +13,8 @@ def load_profiles():
     try:
         with open(saves_file_path, 'r') as saves_file:
             profiles_dict = json.load(saves_file)
-            profiles_dict = profiles_dict['profiles']
+            if len(profiles_dict) > 0:
+                profiles_dict = profiles_dict['profiles']
     except FileNotFoundError:
         with open(saves_file_path, 'w') as saves_file:
             # CREATING
@@ -48,4 +49,11 @@ def character_creation(name):
         json.dump(data_profiles, saves_file, indent=4)
 
     return character_profile
-    
+
+def delete_character(name):
+    profiles_dict = load_profiles()
+
+    del profiles_dict[name]
+    with open(saves_file_path, 'w') as saves_file:
+        json.dump(profiles_dict, saves_file, indent=4)
+    return profiles_dict
