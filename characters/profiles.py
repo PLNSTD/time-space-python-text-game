@@ -50,6 +50,7 @@ def character_creation(name):
 
     return character_profile
 
+# DELETES A CHARACTER BY NAME
 def delete_character(name):
     profiles_dict = load_profiles()
 

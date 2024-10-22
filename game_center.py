@@ -5,11 +5,21 @@ import time
 
 profiles_dic = {}
 
+def get_player_input():
+    player_input = input('\nYour choice: ')
+
+    try:
+        player_input = int(player_input)
+    except (ValueError, OverflowError):
+        return -1
+    
+    return player_input
+
 def Game():
     while True:
         print('Welcome to TimeSpace!\n\n')
         print('Press a key:\n\t1 - Start\n\t0 - Exit Game')
-        user_choice = int(input('\nYour choice: '))
+        user_choice = get_player_input()
         if user_choice == 1: # START
             prompt_clear()
             start()
@@ -24,8 +34,10 @@ def start():
         print('\n\t1 - New Game')
         print('\n\t2 - Load Characters')
         print('\n\t0 - Exit')
-        user_choice = int(input('\nYour choice: '))
-        if user_choice == 2: # SHOW CHARACTERS
+        user_choice = get_player_input()
+        if user_choice == 1: # CREATES A NEW CHARACTER
+            pass
+        elif user_choice == 2: # SHOW CHARACTERS
             prompt_clear()
             load_characters()
         elif user_choice == 0:
@@ -48,7 +60,7 @@ def load_characters():
             print(f'\n{profile[0] + 1} - Name: {profile[1]}\n\tLv: {profiles_dic[profile[1]].get('level')}')
 
         print('\n0 - Return to Main Menu')
-        user_choice = int(input('\nYour choice: '))
+        user_choice = get_player_input()
         if user_choice == 0:
             prompt_clear()
             break
@@ -68,7 +80,7 @@ def character_option(character_dic):
         print('\n\t1 - Start Game')
         print('\n\t2 - Delete Character')
         print('\n\t0 - Return to character selection')
-        user_choice = int(input('\nYour choice: '))
+        user_choice = get_player_input()
         if user_choice == 1: # START GAME
             prompt_clear()
             pass
