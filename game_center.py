@@ -37,7 +37,7 @@ def start_menu():
         user_choice = get_player_input_choice()
         if user_choice == 1: # CREATES A NEW CHARACTER
             prompt_clear()
-            new_game_character()
+            character_creation_menu()
         elif user_choice == 2: # SHOW CHARACTERS
             prompt_clear()
             load_characters_menu()
@@ -46,12 +46,14 @@ def start_menu():
             break
         prompt_clear()   
 
-def new_game_character():
+def character_creation_menu():
     while True:
         character_name = input('Insert a name for your new character: ')
         if len(character_name) > 0 and (mc.get_character(character_name))[0] == False:
             character_profile = mc.character_creation(character_name)
             print('You have created your character!')
+            prompt_clear()
+            # GAMEPLAY
         else:
             print('\nCharacter name already taken!')
             continue

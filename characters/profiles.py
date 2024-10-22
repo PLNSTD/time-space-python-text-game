@@ -10,12 +10,11 @@ saves_file_path = os.path.join(current_directory, 'data.json')
 # GET EVERY CHARACTER
 def load_profiles():
     profiles_dict = {}
-
     # CHECK FILE EXISTANCE AND CREATES IT IF NOT FOUND
     try:
         with open(saves_file_path, 'r') as saves_file:
-            profiles_dict = json.load(saves_file)
-            profiles_dict = profiles_dict['profiles']
+            data = json.load(saves_file)
+            profiles_dict = data['profiles']
     except FileNotFoundError:
         with open(saves_file_path, 'w') as saves_file:
             # CREATING
@@ -32,12 +31,12 @@ def get_character(name):
     character_profile = {}
     try:
         with open(saves_file_path, 'r') as saves_file:
-            profiles_dict = json.load(saves_file)
-            print(json.dumps(profiles_dict))
-            if len(profiles_dict['profiles']) == 0:
+            data = json.load(saves_file)
+            print(json.dumps(data))
+            if len(data['profiles']) == 0:
                 raise ExitWithBlock
-            if name in profiles_dict['profiles'].keys():
-                character_profile = profiles_dict['profiles'][name]
+            if name in data['profiles'].keys():
+                character_profile = data['profiles'][name]
                 result = True
     except ExitWithBlock: # No profiles in profile
         print('No profiles')
@@ -61,15 +60,15 @@ def character_creation(name):
 # DELETES A CHARACTER BY NAME
 def delete_character(name):
     print(f'\nDeleting Character: {name}...')
-    profiles_dict = {}
+    data = {}
     with open(saves_file_path, 'r') as saves_file:
-        profiles_dict = json.load(saves_file)
+        data = json.load(saves_file)
         
-    print(profiles_dict)
-    if name in profiles_dict['profiles']:
-        del profiles_dict['profiles'][name]
-    print(f'UPDATED characters list: {profiles_dict}')
+    print(data)
+    if name in data['profiles']:
+        del data['profiles'][name]
+    print(f'UPDATED characters list: {data}')
     with open(saves_file_path, 'w') as saves_file:
-        json.dump(profiles_dict, saves_file, indent=4)
+        json.dump(data, saves_file, indent=4)
     time.sleep(5)
-    return profiles_dict['profiles']
+    return data['profiles']
