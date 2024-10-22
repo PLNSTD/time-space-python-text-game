@@ -1,4 +1,5 @@
 import characters.profiles as mc
+import gameplay.rooms.room_management as room_manager
 import os
 import json
 import time
@@ -98,7 +99,7 @@ def character_option_menu(character_dic):
         user_choice = get_player_input_choice()
         if user_choice == 1: # START GAME
             prompt_clear()
-            pass
+            room_manager.start()
         elif user_choice == 2: # DELETE THIS CHARACTER
             prompt_clear()
             profiles_dic = mc.delete_character(character_dic['name'])

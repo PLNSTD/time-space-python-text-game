@@ -109,10 +109,10 @@
 >
 > # ToDo LIST
 >
-> 1. [ ] Virtual environment Creation
-> 1. [ ] Character Creation
-> 1. [ ] Saving Files
->    1. [ ] Character
+> 1. [x] Virtual environment Creation
+> 1. [x] Character Creation
+> 1. [x] Saving Files
+>    1. [x] Character
 >    1. [ ] Map and rooms
 >    1. [ ] Stats
 >    1. [ ] Mobs
