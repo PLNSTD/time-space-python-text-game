@@ -99,7 +99,7 @@ def character_option_menu(character_dic):
         user_choice = get_player_input_choice()
         if user_choice == 1: # START GAME
             prompt_clear()
-            room_manager.start()
+            room_manager.start(character_dic['name'])
         elif user_choice == 2: # DELETE THIS CHARACTER
             prompt_clear()
             profiles_dic = mc.delete_character(character_dic['name'])
