@@ -5,7 +5,7 @@ import time
 
 profiles_dic = {}
 
-def get_player_input():
+def get_player_input_choice():
     player_input = input('\nYour choice: ')
 
     try:
@@ -19,33 +19,46 @@ def Game():
     while True:
         print('Welcome to TimeSpace!\n\n')
         print('Press a key:\n\t1 - Start\n\t0 - Exit Game')
-        user_choice = get_player_input()
+        user_choice = get_player_input_choice()
         if user_choice == 1: # START
             prompt_clear()
-            start()
+            start_menu()
         elif user_choice == 0: # EXIT
             prompt_clear()
             break
         prompt_clear()
 
-def start():
+def start_menu():
     while True:
         print('Press a key:')
         print('\n\t1 - New Game')
         print('\n\t2 - Load Characters')
         print('\n\t0 - Exit')
-        user_choice = get_player_input()
+        user_choice = get_player_input_choice()
         if user_choice == 1: # CREATES A NEW CHARACTER
-            pass
+            prompt_clear()
+            new_game_character()
         elif user_choice == 2: # SHOW CHARACTERS
             prompt_clear()
-            load_characters()
+            load_characters_menu()
         elif user_choice == 0:
             prompt_clear()
             break
         prompt_clear()   
 
-def load_characters():
+def new_game_character():
+    while True:
+        character_name = input('Insert a name for your new character: ')
+        if len(character_name) > 0 and (mc.get_character(character_name))[0] == False:
+            character_profile = mc.character_creation(character_name)
+            print('You have created your character!')
+        else:
+            print('\nCharacter name already taken!')
+            continue
+        prompt_clear()
+        break
+    
+def load_characters_menu():
     global profiles_dic
     profiles_dic = mc.load_profiles()
     if len(profiles_dic) == 0:
@@ -60,7 +73,7 @@ def load_characters():
             print(f'\n{profile[0] + 1} - Name: {profile[1]}\n\tLv: {profiles_dic[profile[1]].get('level')}')
 
         print('\n0 - Return to Main Menu')
-        user_choice = get_player_input()
+        user_choice = get_player_input_choice()
         if user_choice == 0:
             prompt_clear()
             break
@@ -69,10 +82,10 @@ def load_characters():
             character_chosen = profiles_list[user_choice - 1]
             print(f'{character_chosen}')
             prompt_clear()
-            character_option(character_chosen)
+            character_option_menu(character_chosen)
         prompt_clear()
 
-def character_option(character_dic):
+def character_option_menu(character_dic):
     global profiles_dic
     while True:
         print(f'You have chosen:\n{character_dic['name']}\nLv: {character_dic['level']}')
@@ -80,7 +93,7 @@ def character_option(character_dic):
         print('\n\t1 - Start Game')
         print('\n\t2 - Delete Character')
         print('\n\t0 - Return to character selection')
-        user_choice = get_player_input()
+        user_choice = get_player_input_choice()
         if user_choice == 1: # START GAME
             prompt_clear()
             pass
