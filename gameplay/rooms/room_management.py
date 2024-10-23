@@ -12,16 +12,17 @@ from gameplay.rooms import start_room
 
 # Construct the relative path to data.json
 saves_file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'characters', 'data.json')
-MAX_SIDE = 2 # length from 0 in each direction - USED FOR COORDINATES [-2, +2]
+MAX_DEPTH = 5
 character_name = ''
 room_seeds_available = {'safe': 2, 'ending': 1, 'general': {'tot': 21, 'snow': 2, 'sand': 2, 'cave': 2, 'empty': 15}}
-rooms_map = [[None for _ in range(5)] for _ in range(5)]
+rooms_map = [[None for _ in range(MAX_DEPTH)] for _ in range(MAX_DEPTH)]
+visited_rooms_map = [[None for _ in range(MAX_DEPTH)] for _ in range(MAX_DEPTH)] # USED TO BE SHOWN TO THE USER
 
 def start(character_name_str):
     global character_name
     character_name = character_name_str
     map_dict = {}
-    start_room.creation()
+    start_room.creation(MAX_DEPTH)
     print(start_room.get_room_coord())
     create_rooms_map(start_room.get_room_coord())
     x = input('Did you understand?')
@@ -29,10 +30,11 @@ def start(character_name_str):
 def create_rooms_map(coord):
     global rooms_map
     data = None
-    for row in range(-2, 3):
-        for col in range(-2, 3):
+    for row in range(MAX_DEPTH):
+        for col in range(MAX_DEPTH):
             if row == coord[0] and col == coord[1]:
-                rooms_map[row][col] == 'start'
+                print('I DIDNT COME')
+                rooms_map[row][col] = 'start'
                 continue
             rooms_map[row][col] = get_seed()
     
@@ -45,9 +47,10 @@ def create_rooms_map(coord):
     with open(saves_file_path, 'w') as saves_file:
         json.dump(data, saves_file, indent=4)
             
-def change_room(coord_tuple, direction):
+def change_room(coord_tuple):
     row, col = coord_tuple
 
+    ###### IMPORTANT: Change from -2 to 0 and from +2 to 4 because index changed in the map
     if row == -2 and col == -2: # Top-left
         pass
     elif row == -2 and col == 2: # Top-right
@@ -78,15 +81,15 @@ def get_seed():
                     random_general_seed = random.randint(1,21)
                     if random_general_seed in excluded_general_seeds:
                         continue
-                    if seed == 1 and room_seeds_available['general']['snow'] > 0:
+                    if random_general_seed == 1 and room_seeds_available['general']['snow'] > 0:
                         room_seeds_available['general']['snow'] -= 1
                         room_seeds_available['general']['tot'] -= 1
                         return 'snow'
-                    elif seed == 2 and room_seeds_available['general']['sand'] > 0:
+                    elif random_general_seed == 2 and room_seeds_available['general']['sand'] > 0:
                         room_seeds_available['general']['sand'] -= 1
                         room_seeds_available['general']['tot'] -= 1
                         return 'sand'
-                    elif seed == 3 and room_seeds_available['general']['cave'] > 0:
+                    elif random_general_seed == 3 and room_seeds_available['general']['cave'] > 0:
                         room_seeds_available['general']['cave'] -= 1
                         room_seeds_available['general']['tot'] -= 1
                         return 'cave'
@@ -109,6 +112,7 @@ def get_opposite_direction(direction):
     else:
         return 'start'
 
+# IDK IF THIS CAN BE USED AS FUNCTION.. DELETING LATER
 def visit_room(room_name):
     room_info = {}
 
