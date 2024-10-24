@@ -9,6 +9,7 @@ import random
 import os
 import json
 from gameplay.rooms import start_room
+from utils import tools as user
 
 # Construct the relative path to data.json
 saves_file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'characters', 'data.json')
@@ -21,11 +22,12 @@ visited_rooms_map = [[None for _ in range(MAX_DEPTH)] for _ in range(MAX_DEPTH)]
 def start(character_name_str):
     global character_name
     character_name = character_name_str
+    # IF SAVING_FILE_EXISTS: LOAD MAP AND POSITION
     map_dict = {}
     start_room.creation(MAX_DEPTH)
     print(start_room.get_room_coord())
     create_rooms_map(start_room.get_room_coord())
-    x = input('Did you understand?')
+    change_room(start_room.get_room_coord())
 
 def create_rooms_map(coord):
     global rooms_map
@@ -33,10 +35,10 @@ def create_rooms_map(coord):
     for row in range(MAX_DEPTH):
         for col in range(MAX_DEPTH):
             if row == coord[0] and col == coord[1]:
-                print('I DIDNT COME')
                 rooms_map[row][col] = 'start'
                 continue
             rooms_map[row][col] = get_seed()
+    user.prompt_clear()
     
     with open(saves_file_path, 'r') as saves_file:
         data = json.load(saves_file)
@@ -49,20 +51,45 @@ def create_rooms_map(coord):
             
 def change_room(coord_tuple):
     row, col = coord_tuple
+    room_choices = []
+    direction = -1
 
-    ###### IMPORTANT: Change from -2 to 0 and from +2 to 4 because index changed in the map
-    if row == -2 and col == -2: # Top-left
-        pass
-    elif row == -2 and col == 2: # Top-right
-        pass
-    elif row == 2 and col == -2: # Bot-left
-        pass
-    elif row == 2 and col == 2: # Bot-right
-        pass
+    if row == 0 and col == 0: # Top-left
+        room_choices.extend(['Down', 'Right'])
+    elif row == 0 and col == 4: # Top-right
+        room_choices.extend(['Down', 'Left'])
+    elif row == 4 and col == 0: # Bot-left
+        room_choices.extend(['Up', 'Right'])
+    elif row == 4 and col == 4: # Bot-right
+        room_choices.extend(['Up', 'Left'])
+    elif row == 0:
+        room_choices.extend(['Down', 'Left', 'Right'])
+    elif row == MAX_DEPTH - 1:
+        room_choices.extend(['Up', 'Left', 'Right'])
+    elif col == 0:
+        room_choices.extend(['Up', 'Down', 'Right'])
+    elif col == MAX_DEPTH - 1:
+        room_choices.extend(['Up', 'Down', 'Left'])
+    else:
+        room_choices.extend(['Up', 'Down', 'Left', 'Right'])
+
+    direction = show_room_choices(coord_tuple, room_choices)
+
+def show_room_choices(this_room, choices):
+    while True:
+        print(f'You are in this coordinates ({this_room[0]} - {this_room[1]}) \nYou can go:')
+        for index, direction in enumerate(choices):
+            print(f"\t{index} - {direction}")
+        choice = user.get_player_input_choice()
+        if 0 <= choice < len(choices):
+            return choice
+        user.prompt_clear()
 
 def get_seed():
     excluded_seeds = []
     while True:
+        print(f'Getting seeds... remaining {room_seeds_available}')
+        print(rooms_map)
         random_seed = random.randint(1, 3)
         if random_seed in excluded_seeds:
             continue
