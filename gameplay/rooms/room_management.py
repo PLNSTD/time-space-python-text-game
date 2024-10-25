@@ -14,6 +14,7 @@ from utils import tools as user
 # Construct the relative path to data.json
 saves_file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'characters', 'data.json')
 MAX_DEPTH = 5
+get_seed_cnt = 25
 character_name = ''
 room_seeds_available = {'safe': 2, 'ending': 1, 'general': {'tot': 21, 'snow': 2, 'sand': 2, 'cave': 2, 'empty': 15}}
 rooms_map = [[None for _ in range(MAX_DEPTH)] for _ in range(MAX_DEPTH)]
@@ -39,7 +40,7 @@ def create_rooms_map(coord):
                 continue
             rooms_map[row][col] = get_seed()
     user.prompt_clear()
-    
+
     with open(saves_file_path, 'r') as saves_file:
         data = json.load(saves_file)
     
@@ -74,33 +75,53 @@ def change_room(coord_tuple):
         room_choices.extend(['Up', 'Down', 'Left', 'Right'])
 
     direction = show_room_choices(coord_tuple, room_choices)
+    if room_choices[direction] == 'Up':
+        change_room((coord_tuple[0] - 1, coord_tuple[1]))
+    elif room_choices[direction] == 'Down':
+        change_room((coord_tuple[0] + 1, coord_tuple[1]))
+    elif room_choices[direction] == 'Left':
+        change_room((coord_tuple[0], coord_tuple[1] - 1))
+    elif room_choices[direction] == 'Right':
+        change_room((coord_tuple[0], coord_tuple[1] + 1))
 
 def show_room_choices(this_room, choices):
+    visited_rooms_map[this_room[0]][this_room[1]] = 'User'
     while True:
-        print(f'You are in this coordinates ({this_room[0]} - {this_room[1]}) \nYou can go:')
+        print(f'MAP: {show_map()}')
+        print(f'You are in this coordinates ({this_room[0]} - {this_room[1]})')
+        print('\nYou can go:')
         for index, direction in enumerate(choices):
             print(f"\t{index} - {direction}")
         choice = user.get_player_input_choice()
         if 0 <= choice < len(choices):
+            visited_rooms_map[this_room[0]][this_room[1]] = rooms_map[this_room[0]][this_room[1]]
+            user.prompt_clear()
             return choice
         user.prompt_clear()
 
 def get_seed():
     excluded_seeds = []
+    global get_seed_cnt
     while True:
         print(f'Getting seeds... remaining {room_seeds_available}')
         print(rooms_map)
         random_seed = random.randint(1, 3)
         if random_seed in excluded_seeds:
             continue
+        else:
+            get_seed_cnt -= 1
         if random_seed == 1:
             if room_seeds_available['safe'] > 0:
                 room_seeds_available['safe'] -= 1
                 return 'safe'
+            else:
+                excluded_seeds.append(random_seed)
         elif random_seed == 2:
             if room_seeds_available['ending'] > 0:
                 room_seeds_available['ending'] -= 1
                 return 'ending'
+            else:
+                excluded_seeds.append(random_seed)
         elif random_seed == 3:
             if room_seeds_available['general']['tot'] > 0:
                 excluded_general_seeds = []
@@ -108,24 +129,35 @@ def get_seed():
                     random_general_seed = random.randint(1,21)
                     if random_general_seed in excluded_general_seeds:
                         continue
-                    if random_general_seed == 1 and room_seeds_available['general']['snow'] > 0:
-                        room_seeds_available['general']['snow'] -= 1
-                        room_seeds_available['general']['tot'] -= 1
-                        return 'snow'
-                    elif random_general_seed == 2 and room_seeds_available['general']['sand'] > 0:
-                        room_seeds_available['general']['sand'] -= 1
-                        room_seeds_available['general']['tot'] -= 1
-                        return 'sand'
-                    elif random_general_seed == 3 and room_seeds_available['general']['cave'] > 0:
-                        room_seeds_available['general']['cave'] -= 1
-                        room_seeds_available['general']['tot'] -= 1
-                        return 'cave'
+                    if random_general_seed == 1:
+                        if room_seeds_available['general']['snow'] > 0:
+                            room_seeds_available['general']['snow'] -= 1
+                            room_seeds_available['general']['tot'] -= 1
+                            return 'snow'
+                        else:
+                            excluded_general_seeds.append(random_general_seed)
+                    elif random_general_seed == 2:
+                        if room_seeds_available['general']['sand'] > 0:
+                            room_seeds_available['general']['sand'] -= 1
+                            room_seeds_available['general']['tot'] -= 1
+                            return 'sand'
+                        else:
+                            excluded_general_seeds.append(random_general_seed)
+                    elif random_general_seed == 3:
+                        if room_seeds_available['general']['cave'] > 0:
+                            room_seeds_available['general']['cave'] -= 1
+                            room_seeds_available['general']['tot'] -= 1
+                            return 'cave'
+                        else:
+                            excluded_general_seeds.append(random_general_seed)
                     elif room_seeds_available['general']['empty'] > 0:
                         room_seeds_available['general']['empty'] -= 1
                         room_seeds_available['general']['tot'] -= 1
                         return 'empty'
-                    excluded_general_seeds.append(random_general_seed)
-        excluded_seeds.append(random_seed)
+                    
+def show_map():
+    for room in visited_rooms_map:
+        print(room)
 
 def get_opposite_direction(direction):
     if direction == 'left':
