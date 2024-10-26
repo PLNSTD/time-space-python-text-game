@@ -119,7 +119,7 @@
 >    1. [ ] Stats
 >    1. [ ] Mobs
 > 1. [x] Map Creation
-> 1. [ ] Movement Development
+> 1. [x] Movement Development
 > 1. [ ] WIN conditions
 > 1. [ ] Mob Creation
 > 1. [ ] Character Stats

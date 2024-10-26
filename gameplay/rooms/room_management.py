@@ -28,7 +28,7 @@ def start(character_name_str):
     start_room.creation(MAX_DEPTH)
     print(start_room.get_room_coord())
     create_rooms_map(start_room.get_room_coord())
-    change_room(start_room.get_room_coord())
+    visit_room(start_room.get_room_coord())
 
 def create_rooms_map(coord):
     global rooms_map
@@ -50,7 +50,7 @@ def create_rooms_map(coord):
     with open(saves_file_path, 'w') as saves_file:
         json.dump(data, saves_file, indent=4)
             
-def change_room(coord_tuple):
+def visit_room(coord_tuple):
     row, col = coord_tuple
     room_choices = []
     direction = -1
@@ -76,18 +76,18 @@ def change_room(coord_tuple):
 
     direction = show_room_choices(coord_tuple, room_choices)
     if room_choices[direction] == 'Up':
-        change_room((coord_tuple[0] - 1, coord_tuple[1]))
+        visit_room((coord_tuple[0] - 1, coord_tuple[1]))
     elif room_choices[direction] == 'Down':
-        change_room((coord_tuple[0] + 1, coord_tuple[1]))
+        visit_room((coord_tuple[0] + 1, coord_tuple[1]))
     elif room_choices[direction] == 'Left':
-        change_room((coord_tuple[0], coord_tuple[1] - 1))
+        visit_room((coord_tuple[0], coord_tuple[1] - 1))
     elif room_choices[direction] == 'Right':
-        change_room((coord_tuple[0], coord_tuple[1] + 1))
+        visit_room((coord_tuple[0], coord_tuple[1] + 1))
 
 def show_room_choices(this_room, choices):
     visited_rooms_map[this_room[0]][this_room[1]] = 'User'
     while True:
-        print(f'MAP: {show_map()}')
+        print(f'MAP: {show_visited_map()}')
         print(f'You are in this coordinates ({this_room[0]} - {this_room[1]})')
         print('\nYou can go:')
         for index, direction in enumerate(choices):
@@ -155,32 +155,9 @@ def get_seed():
                         room_seeds_available['general']['tot'] -= 1
                         return 'empty'
                     
-def show_map():
+def show_visited_map():
     for room in visited_rooms_map:
         print(room)
-
-def get_opposite_direction(direction):
-    if direction == 'left':
-        return 'right'
-    elif direction == 'right':
-        return 'left'
-    elif direction == 'up':
-        return 'down'
-    elif direction == 'down':
-        return 'up'
-    else:
-        return 'start'
-
-# IDK IF THIS CAN BE USED AS FUNCTION.. DELETING LATER
-def visit_room(room_name):
-    room_info = {}
-
-    with open(saves_file_path, 'r') as saves_file:
-        data = json.load(saves_file)
-        room_info = data['profiles'][character_name]['rooms'][room_name]
-
-    if not room_info['visited']:
-        create_adj(room_info)
 
 # def map_new_room(room_name, room_coord, left=None, up=None, right=None, down=None):
 #     room_dict = {'name': room_name, 'coordinates': room_coord, 'adj_rooms': {'left': left, 'up': up, 'right': right, 'down': down}, 'visited': False}
