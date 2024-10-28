@@ -15,7 +15,7 @@ def save_progress(character_name, room_info, rooms_map, visited_map):
     character_info['visited_map'] = visited_map
 
     with open(saves_file_path, 'w') as saves_file:
-        json.dump(data, saves_file)
+        json.dump(data, saves_file, indent=4)
 
 def load_progress(character_name):
     data = {}
