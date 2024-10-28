@@ -3,13 +3,14 @@ import json
 
 saves_file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'characters', 'data.json')
 
-def save_progress(character_name, room_info, visited_map):
+def save_progress(character_name, room_info, rooms_map, visited_map):
     data = {}
 
     with open(saves_file_path, 'r') as saves_file:
         data = json.load(saves_file)
     
     character_info = data['profiles'].get(character_name)
+    character_info['rooms_map'] = rooms_map
     character_info['position'] = room_info
     character_info['visited_map'] = visited_map
 

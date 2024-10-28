@@ -10,6 +10,7 @@ import os
 import json
 from gameplay.rooms import start_room
 from utils import tools as user
+from gameplay.rooms import saving_position
 
 # Construct the relative path to data.json
 saves_file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'characters', 'data.json')
@@ -31,20 +32,19 @@ def start(character_name_str):
     # IF SAVING_FILE_EXISTS: LOAD MAP AND POSITION
     with open(saves_file_path, 'r') as saves_file:
         data = json.load(saves_file)
-        character_info = data['profiles'].get(character_info)
-        rooms_map = character_info.get(rooms_map, None)
+        character_info = data['profiles'].get(character_name)
 
-    if character_info[rooms_map] == None:
+    if character_info.get('rooms_map', None) == None:
         start_room.creation(MAX_DEPTH)
         print(start_room.get_room_coord())
         create_rooms_map(start_room.get_room_coord())
         visit_room(start_room.get_room_coord())
     else:
+        rooms_map = character_info['rooms_map']
         starting_position = character_info['position']
         visited_rooms_map = character_info['visited_map']
         visit_room(starting_position)
     
-
 def create_rooms_map(coord):
     global rooms_map
     data = None
@@ -67,6 +67,7 @@ def create_rooms_map(coord):
             
 def visit_room(coord_tuple):
     row, col = coord_tuple
+    saving_position.save_progress(character_name, [row, col], rooms_map, visited_rooms_map)
     room_choices = []
     direction = -1
 
@@ -173,20 +174,3 @@ def get_seed():
 def show_visited_map():
     for room in visited_rooms_map:
         print(room)
-
-# def map_new_room(room_name, room_coord, left=None, up=None, right=None, down=None):
-#     room_dict = {'name': room_name, 'coordinates': room_coord, 'adj_rooms': {'left': left, 'up': up, 'right': right, 'down': down}, 'visited': False}
-#     character_data = {}
-
-#     with open(saves_file_path,'r') as saves_file:
-#         data = json.load(saves_file)
-#         character_data = data['profiles'][character_name]
-#         print(json.dumps(character_data))
-
-#     try:
-#         character_data['rooms'].update({room_name: room_dict})
-#     except:
-#         character_data['rooms'] = {room_name: room_dict}
-    
-#     with open(saves_file_path, 'w') as saves_file:
-#         json.dump(data, saves_file, indent=4)
