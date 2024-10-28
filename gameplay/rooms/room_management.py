@@ -22,13 +22,28 @@ visited_rooms_map = [[None for _ in range(MAX_DEPTH)] for _ in range(MAX_DEPTH)]
 
 def start(character_name_str):
     global character_name
+    global starting_position
+    global visited_rooms_map
+    global rooms_map
+
     character_name = character_name_str
+    character_info = {}
     # IF SAVING_FILE_EXISTS: LOAD MAP AND POSITION
-    map_dict = {}
-    start_room.creation(MAX_DEPTH)
-    print(start_room.get_room_coord())
-    create_rooms_map(start_room.get_room_coord())
-    visit_room(start_room.get_room_coord())
+    with open(saves_file_path, 'r') as saves_file:
+        data = json.load(saves_file)
+        character_info = data['profiles'].get(character_info)
+        rooms_map = character_info.get(rooms_map, None)
+
+    if character_info[rooms_map] == None:
+        start_room.creation(MAX_DEPTH)
+        print(start_room.get_room_coord())
+        create_rooms_map(start_room.get_room_coord())
+        visit_room(start_room.get_room_coord())
+    else:
+        starting_position = character_info['position']
+        visited_rooms_map = character_info['visited_map']
+        visit_room(starting_position)
+    
 
 def create_rooms_map(coord):
     global rooms_map
