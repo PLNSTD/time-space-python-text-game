@@ -8,7 +8,7 @@ IDEAs:
 import random
 import os
 import json
-from gameplay.rooms import start_room
+from gameplay.rooms import start_room, safe_room
 from utils import tools
 from gameplay.rooms import saving_position
 
@@ -125,10 +125,10 @@ def show_directions_choices(this_room, choices):
 def show_room_options(this_room):
     row, col = this_room[0], this_room[1]
     if rooms_map[row][col] == 'start':
-        start_room.options()
+        start_room.options(character_name)
         return
     elif rooms_map[row][col] == 'safe':
-        # Heal with potions
+        safe_room.options(character_name)
         # Merchant
         pass
     elif rooms_map[row][col] == 'ending':

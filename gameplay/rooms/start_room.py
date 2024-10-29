@@ -15,7 +15,7 @@ def random_coord(MAX_DEPTH):
 def get_room_coord():
     return coordinates
 
-def options():
+def options(character_name):
     while True:
         print(f'You are in the starting room, here you can:')
         print('\t1 - Move')
