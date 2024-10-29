@@ -8,9 +8,10 @@ IDEAs:
 import random
 import os
 import json
-from gameplay.rooms import start_room, safe_room
+import time
+from gameplay.rooms import start_room, safe_room, saving_position
 from utils import tools
-from gameplay.rooms import saving_position
+from gameplay.stats_and_inventory import character_inventory
 
 # Construct the relative path to data.json
 saves_file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'characters', 'data.json')
@@ -20,6 +21,7 @@ character_name = ''
 room_seeds_available = {'safe': 2, 'ending': 1, 'general': {'tot': 21, 'snow': 2, 'sand': 2, 'cave': 2, 'empty': 15}}
 rooms_map = [[None for _ in range(MAX_DEPTH)] for _ in range(MAX_DEPTH)]
 visited_rooms_map = [[None for _ in range(MAX_DEPTH)] for _ in range(MAX_DEPTH)] # USED TO BE SHOWN TO THE USER
+has_map = False
 
 def start(character_name_str):
     global character_name
@@ -66,7 +68,10 @@ def create_rooms_map(coord):
         json.dump(data, saves_file, indent=4)
             
 def visit_room(coord_tuple):
+    global visited_rooms_map
+    visited_rooms_map[coord_tuple[0]][coord_tuple[1]] = 'User'
     while True:
+        show_visited_map()
         row, col = coord_tuple
         saving_position.save_progress(character_name, [row, col], rooms_map, visited_rooms_map)
         show_room_options(coord_tuple)
@@ -105,9 +110,12 @@ def visit_room(coord_tuple):
             visit_room((coord_tuple[0], coord_tuple[1] + 1))
 
 def show_directions_choices(this_room, choices):
+    global visited_rooms_map
     visited_rooms_map[this_room[0]][this_room[1]] = 'User'
+    time.sleep(0.5)
+    tools.prompt_clear()
     while True:
-        print(f'MAP: {show_visited_map()}')
+        show_visited_map()
         print(f'You are in this coordinates ({this_room[0]} - {this_room[1]})')
         print('\nYou can go:')
         for index, direction in enumerate(choices):
@@ -139,11 +147,11 @@ def show_room_options(this_room):
         # Action or escape
         pass
     elif rooms_map[row][col] == 'sand':
-        # Snow enemies
+        # Bandits
         # Action or escape
         pass
     elif rooms_map[row][col] == 'cave':
-        # Snow enemies
+        # Skeletons
         # Action or escape
         pass
     elif rooms_map[row][col] == 'empty':
@@ -208,5 +216,13 @@ def get_seed():
                         return 'empty'
                     
 def show_visited_map():
+    if not has_map:
+        user_inventory = character_inventory.get_inventory(character_name)
+        if 'map' in user_inventory:
+            has_map = True
+            visited_rooms_map = rooms_map
+    print('\n\t----------Map----------')
     for room in visited_rooms_map:
-        print(room)
+        print(f'\t{room}')
+    print('\n')
+    

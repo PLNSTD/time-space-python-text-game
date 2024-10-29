@@ -45,7 +45,8 @@ def get_character(name):
 
 # CREATES A CHARACTER BY NAME (NO CHECKING FOR DUPLICATES)
 def character_creation(name):
-    character_profile = {'name': name, 'level': 1, 'skills': {'health': 1, 'agility': 1, 'magic': 1, 'speech': 1}}
+    name = name.lower()
+    character_profile = {'name': name, 'level': 1, 'skills': {'health': 1, 'agility': 1, 'magic': 1, 'speech': 1}, 'stats': {'health': 25, 'mana': 10, 'xp': 0, 'attack': 5}}
     data_profiles = {}
     with open(saves_file_path, 'r') as saves_file:
         data_profiles = json.load(saves_file)
