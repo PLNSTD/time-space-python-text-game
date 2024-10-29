@@ -3,7 +3,14 @@ from gameplay.stats_and_inventory import character_inventory, character_stats
 import json
 import time
 
-def options(character_name):
+user_inventory = {}
+character_name = ''
+def options(user_name):
+    global character_inventory
+    global character_name
+    character_name = user_name
+    user_inventory = character_inventory.get_inventory(character_name)
+
     while True:
         print(f'You are in the safe room, here you can:')
         print('\t1 - Move')
@@ -44,5 +51,51 @@ def options(character_name):
         tools.prompt_clear()
 
 def talk_to_merchant():
-    print('***Hello Adventurer! I am the Great Merchant***')
-    # options to buy
+    global user_inventory
+    global character_name
+    ending_advice = False
+    print('\n\t***Hello Adventurer! I am the Great Merchant***\n')
+    while True:
+        print('\t1 - Take a look to the Merch')
+        if 'ending_note' in user_inventory:
+            ending_advice = True
+            print('\t2 - Ask for the Ending Key')
+        print('\t0 - Move away')
+        choice = tools.get_player_input_choice()
+        if choice == 1:
+            character_inventory.add_item(character_name, 'ending_key')
+            pass
+        elif choice == 2 and ending_advice:
+            print("How do you know about the key?")
+            print("Ah... very few know of such secrets. This key is indeed a powerful tool—a means to escape this twisted time-space dungeon.")
+            print("But knowledge like that doesn’t come cheap, you see.")
+            print("We merchants... we don’t simply *give away* wisdom. Pay my price, and perhaps I might recall rumors of three possible locations...")
+            print("Yes, yes... Three mysterious areas. Who knows what might lurk within?")
+            print("But only with payment can I guide you closer to the key. Without it, I fear my lips are sealed!")
+            while True:
+                if 'gold' in user_inventory:
+                    if user_inventory.get('gold') >= 50: 
+                        print('Would you like to pay 50 Gold to know more?')
+                        print('\t1 - Pay the gold')
+                        print('\t2 - Forget it')
+                        choice = tools.get_player_input_choice()
+                        if choice == 1:
+                            character_inventory.add_item(character_name, 'gold', -50)
+                            user_inventory = character_inventory.get_inventory(character_name)
+                            # Advice based on room
+                            room_seed = user_inventory['ending_note']
+                            if room_seed == 1:
+                                pass
+                            elif room_seed == 2:
+                                pass
+                            elif room_seed == 3:
+                                pass
+                        elif choice == 2:
+                            break
+                    else:
+                        print("\n\tIt appears you lack the necessary 50 gold to persuade the Merchant. Perhaps you should gather more gold and try again.")
+                        time.sleep(2)
+                        break
+        elif choice == 0:
+            return
+

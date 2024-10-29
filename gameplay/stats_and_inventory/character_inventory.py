@@ -34,7 +34,10 @@ def add_item(character_name, item_name, quantity=1):
     if character_info.get('inventory', None) == None:
         character_info['inventory'] = {item_name: quantity}
     else:
-        character_info['inventory'][item_name] = character_info['inventory'].get(item_name, 0) + quantity
+        if item_name is not 'ending_note':
+            character_info['inventory'][item_name] = character_info['inventory'].get(item_name, 0) + quantity
+        else:
+            character_info['inventory'][item_name] = quantity
 
     with open(saves_file_path, 'w') as saves_file:
         json.dump(data, saves_file, indent=4)

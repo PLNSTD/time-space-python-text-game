@@ -9,7 +9,7 @@ import random
 import os
 import json
 import time
-from gameplay.rooms import start_room, safe_room, saving_position
+from gameplay.rooms import start_room, safe_room, saving_position, ending_room
 from utils import tools
 from gameplay.stats_and_inventory import character_inventory
 
@@ -140,7 +140,8 @@ def show_room_options(this_room):
         # Merchant
         pass
     elif rooms_map[row][col] == 'ending':
-        # Ending condition
+        print('You have found the ending room!')
+        ending_room.options(character_name)
         pass
     elif rooms_map[row][col] == 'snow':
         # Snow enemies
@@ -216,6 +217,9 @@ def get_seed():
                         return 'empty'
                     
 def show_visited_map():
+    global has_map
+    global visited_rooms_map
+    global rooms_map
     if not has_map:
         user_inventory = character_inventory.get_inventory(character_name)
         if 'map' in user_inventory:
