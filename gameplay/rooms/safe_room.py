@@ -5,6 +5,10 @@ import time
 
 user_inventory = {}
 character_name = ''
+snow_room_riddle = '\n\tSeek the chill where the frost does bite,\n\tA land of white under pale moonlight.\n\tWhere silence reigns and warmth is rare,\n\tThe key may lie in frozen air'
+cave_room_riddle = '\n\tIf shadows call and echoes roam,\n\tGo where darkness makes its home.\n\tDeep within the earth’s embrace,\n\tThe key might hide in a stony place.'
+sand_room_riddle = '\n\tWhere sun meets ground and grains do flow,\n\tIn endless dunes the warm winds blow.\n\tAmidst the heat and golden land,\n\tThe key may lie beneath the sand.'
+
 def options(user_name):
     global character_inventory
     global character_name
@@ -85,11 +89,11 @@ def talk_to_merchant():
                             # Advice based on room
                             room_seed = user_inventory['key_seed']
                             if room_seed == 'snow':
-                                pass
+                                print(sand_room_riddle)
                             elif room_seed == 'cave':
-                                pass
+                                print(cave_room_riddle)
                             elif room_seed == 'sand':
-                                pass
+                                print(sand_room_riddle)
                         elif choice == 2:
                             break
                     else:
