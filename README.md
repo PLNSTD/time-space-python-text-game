@@ -31,15 +31,15 @@
 
 # Rooms
 
-- [ ] START:
-- [ ] END:
-  - [ ] Opened by condition (key, lever or RoomClear)
-- [ ] GENERAL:
-  - [ ] Snow:
-  - [ ] Sand:
-  - [ ] Oasis:
+- [x] START:
+- [x] END:
+  - [x] Opened by condition (key, lever or RoomClear)
+- [x] GENERAL:
+  - [x] Snow:
+  - [x] Sand:
+  - [x] Cave:
   - NPCs: [Merchant](#merchant) and [Fortune Teller](#fortuneteller)
-  - [ ] Empty room:
+  - [x] Empty room:
   - NPCs: Merchant
   </details>
 
@@ -71,10 +71,10 @@
   - **Resistances**: Light
 - Skeletons
   - **Weaknesses**: Light
-  - **Resistances**: Physic
+  - **Resistances**: Physical
 - Ice monsters
   - **Weaknesses**: Fire
-  - **Resistances**: Ice, Physic
+  - **Resistances**: Ice, Physical
 - Zombies
   - **Weaknesses**: Fire
   - **Resistances**: None
@@ -116,14 +116,14 @@
 > 1. [x] Saving Files
 >    1. [x] Character
 >    1. [x] Map and rooms
->    1. [ ] Stats
->    1. [ ] Mobs
+>    1. [x] Stats
+>    1. [x] Mobs
 > 1. [x] Map Creation
 > 1. [x] Movement Development
-> 1. [ ] WIN conditions
-> 1. [ ] Mob Creation
-> 1. [ ] Character Stats
-> 1. [ ] Fight Development
->    1. [ ] Elements
->    1. [ ] Ultimate
-> 1. [ ] LOSE conditions
+> 1. [x] WIN conditions
+> 1. [x] Mob Creation
+> 1. [x] Character Stats
+> 1. [x] Fight Development
+>    1. [x] Elements
+>    1. [x] Ultimate
+> 1. [x] LOSE conditions

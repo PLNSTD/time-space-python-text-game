@@ -4,7 +4,7 @@ from utils import tools
 import random
 import time
 
-move_set = ['physic', 'fire', 'ice', 'light']
+move_set = ['physical', 'fire', 'ice', 'light']
 user_name = ''
 
 def fight(character_name, enemies):
@@ -14,10 +14,11 @@ def fight(character_name, enemies):
     user_stats = character_stats.get_stats(user_name)
     tot_enemies = enemies['quantity']
     while enemies['quantity'] > 0:
+        user_stats = character_stats.get_stats(user_name)
         character_stats.print_stats(user_stats)
         print_enemies(enemies)
-        print('\t0 - To escape')
-        print('Which enemy do you want to attack?')
+        print('\n\t0 - To escape')
+        print('\nWhich enemy do you want to attack?')
         choice = tools.get_player_input_choice()
         if choice > enemies['quantity'] or choice < 1:
             continue
@@ -63,19 +64,20 @@ def fight(character_name, enemies):
                 damage_received += enemies['attack']
         character_stats.set_health(user_name, -damage_received)
         print(f'\nYou received {damage_received} total damage')
-        if character_stats.get_stats['health'] <= 0:
+        if character_stats.get_stats(character_name)['health'] <= 0:
             print('Game Over... You died!')
             profiles.delete_character(user_name)
             time.sleep(3)
             exit()
-        tools.prompt_clear()
     drops(tot_enemies, True if enemies['drops_key'] else False)
+    tools.prompt_clear()
+
 
 def print_enemies(enemies):
-    for enemy_num in enemies['quantity']:
+    for enemy_num in range(enemies['quantity']):
         enemy_name = enemies["name"]
-        enemy_hp = enemies["name"]['health'][enemy_num]
-        print(f'\n{enemy_num+1} - {enemy_name}:{enemy_hp}hp')
+        enemy_hp = enemies['health'][enemy_num]
+        print(f'\n\t{enemy_num+1} - {enemy_name}:{enemy_hp}hp')
 
 def drops(tot_enemies, key=False):
     global user_name
@@ -86,8 +88,9 @@ def drops(tot_enemies, key=False):
     if key:
         if random.randint(1, tot_enemies * 5) <= tot_enemies:
             drops['ending_key'] = 1
-    
+    if random.randint(1, 10) <= 2:
+        drops['potion'] = 1
     for item_drop in drops:
-        character_inventory.add_item(item_drop)
+        character_inventory.add_item(user_name, item_drop, drops[item_drop])
         print(f'You got {drops[item_drop]}x {item_drop.capitalize()}!')
-    
+    time.sleep(4)

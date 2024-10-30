@@ -7,7 +7,7 @@ saves_file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'character
 def print_inventory(user_inventory):
     print('\nInventory:')
     for item in user_inventory:
-        if item == 'ending_note' or item == 'key_seed ':
+        if item == 'ending_note' or item == 'key_seed':
             continue
         print(f"\n\tItem: {item.capitalize()}")
         print(f"\n\tQt: {user_inventory[item]}")
@@ -33,12 +33,13 @@ def add_item(character_name, item_name, quantity=1):
     if character_info.get('inventory', None) == None:
         character_info['inventory'] = {item_name: quantity}
     else:
-        if item_name not in ['ending_note', 'ending_key']:
+        if item_name not in ['ending_note', 'ending_key', 'key_seed']:
             character_info['inventory'][item_name] = character_info['inventory'].get(item_name, 0) + quantity
         else:
             character_info['inventory'][item_name] = quantity
 
     with open(saves_file_path, 'w') as saves_file:
         json.dump(data, saves_file, indent=4)
-    
-    print(f'\n\tItem: {item_name} {'+' if quantity > 0 else '-'} {quantity}')
+        
+    if item_name not in ['ending_note', 'ending_key', 'key_seed']:
+        print(f'\n\tItem: {item_name} {'+' if quantity > 0 else '-'} {quantity}')

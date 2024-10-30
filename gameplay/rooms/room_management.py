@@ -9,7 +9,7 @@ import random
 import os
 import json
 import time
-from gameplay.rooms import start_room, safe_room, saving_position, ending_room
+from gameplay.rooms import start_room, safe_room, saving_position, ending_room, snow_room, sand_room, cave_room
 from utils import tools
 from gameplay.stats_and_inventory import character_inventory
 
@@ -137,28 +137,23 @@ def show_room_options(this_room):
         return
     elif rooms_map[row][col] == 'safe':
         safe_room.options(character_name)
-        # Merchant
-        pass
+        return
     elif rooms_map[row][col] == 'ending':
         print('You have found the ending room!')
         ending_room.options(character_name)
         pass
     elif rooms_map[row][col] == 'snow':
-        # Snow enemies
-        # Action or escape
-        pass
+        snow_room.options(character_name)
+        return
     elif rooms_map[row][col] == 'sand':
-        # Bandits
-        # Action or escape
-        pass
+        sand_room.options(character_name)
+        return
     elif rooms_map[row][col] == 'cave':
-        # Skeletons
-        # Action or escape
-        pass
+        cave_room.options(character_name)
+        return
     elif rooms_map[row][col] == 'empty':
-        # Snow enemies
-        # Action or escape
-        pass
+        print('This is an empty room! There is not much to do here...')
+        time.sleep(2)
 
 def get_seed():
     excluded_seeds = []

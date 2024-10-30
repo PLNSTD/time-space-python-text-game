@@ -15,7 +15,7 @@ def options(character_name):
             exit()
         elif choice == 0:
             return
-    print('You notice a strange notes on one of the walls of the room:')
+    print('You notice a strange note on one of the walls of the room:')
     while True:
         print('\n\t1 - Read Note')
         print('\n\t0 - Keep Exploring')
@@ -24,6 +24,7 @@ def options(character_name):
             print('\n\tNote:')
             print('\n\tYou did not found the key yet!\n\tAsk to the Merchant in any safe room for guidance')
             note_read = True
+            time.sleep(3)
         elif choice == 0:
             break
         tools.prompt_clear()

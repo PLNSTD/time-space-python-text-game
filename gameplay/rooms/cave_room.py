@@ -5,18 +5,18 @@ from utils import tools
 import time
 
 def options(character_name):
-    print('''\n\tA biting chill wraps around you
-          \tas snowflakes drift through the still air.
-          \tEach step crunches softly,
-          \tbreaking the eerie silence of this frozen realm.''')
-    print('''The ground trembles as figures of ice rise from the snow,
-          eyes glowing with an eerie blue light.
-          'You do not belong here,' they rumble, advancing slowly.
-          'Leave… or be frozen in time.''')
+    print("You step into the cave, and a damp chill settles over you.\n\t"
+      "Shadows twist and crawl along the rough stone walls,\n\t"
+      "while distant echoes hint at unseen depths.\n\t"
+      "The air is thick and still, broken only by the faint drip of water somewhere in the darkness.")
+    print("Bones clatter in the darkness, assembling into twisted forms.\n"
+      "\tA hollow voice echoes through the shadows:\n"
+      "\t'The dead do not rest... and neither shall you.'\n"
+      "\tSkeletons rise, their empty eyes fixed upon you, ready to attack.")
     user_inventory = character_inventory.get_inventory(character_name)
     mob_spawned_quantity = random.randint(1,4)
-    enemies = {'name': 'Ice Golem', 'quantity': mob_spawned_quantity,'attack': 2, 'weaknesses': ['fire'], 'resistances': ['ice', 'physical'], 'health': [40] * mob_spawned_quantity, 'drops_key': False}
-    if user_inventory.get('key_seed') == 'snow':
+    enemies = {'name': 'Skeleton', 'quantity': mob_spawned_quantity,'attack': 1, 'weaknesses': ['light'], 'resistances': ['physical'], 'health': [30] * mob_spawned_quantity, 'drops_key': False}
+    if user_inventory.get('key_seed') == 'cave':
         enemies['drops_key'] = True
     print(f'\n\t{mob_spawned_quantity} {enemies['name']}{'s' if mob_spawned_quantity > 1 else ''} spawned!')
     time.sleep(2)

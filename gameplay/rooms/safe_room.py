@@ -50,7 +50,6 @@ def options(user_name):
                     time.sleep(2)
                 tools.prompt_clear()
         elif choice == 3:
-            character_inventory.add_item(character_name, 'potion')
             talk_to_merchant()
         
         tools.prompt_clear()
@@ -68,8 +67,8 @@ def talk_to_merchant():
         print('\t0 - Move away')
         choice = tools.get_player_input_choice()
         if choice == 1:
-            character_inventory.add_item(character_name, 'ending_key')
-            pass
+            tools.prompt_clear()
+            show_merch()
         elif choice == 2 and ending_advice:
             print("How do you know about the key?")
             print("Ah... very few know of such secrets. This key is indeed a powerful tool—a means to escape this twisted time-space dungeon.")
@@ -105,3 +104,35 @@ def talk_to_merchant():
         elif choice == 0:
             return
 
+def show_merch():
+    merch = {'Potion': 10, 'Map': 30}
+    user_inventory = character_inventory.get_inventory(character_name)
+    while True:
+        print('You will find some good stuff in here:')
+        for item_id, item in enumerate(merch):
+            print(f'\t{item_id + 1} - {item}\n\t\tPrice: {merch[item]} Gold')
+        print(f'\t0 - Not now.')
+        print('\nTell me if you find something interesting')
+        choice = tools.get_player_input_choice()
+        if choice == 1:
+            if user_inventory.get('gold', 0) >= merch['Potion']:
+                character_inventory.add_item(character_name, 'gold', -merch['Potion'])
+                character_inventory.add_item(character_name, 'potion', 1)
+                user_inventory = character_inventory.get_inventory(character_name)
+            else:
+                print('\tI am sorry fellow Adventurer but you do not have enough!')
+                print("\tPerhaps you should gather more gold and try again.")
+            time.sleep(3)
+        elif choice == 2:
+            if user_inventory.get('gold', 0) >= merch['Map']:
+                character_inventory.add_item(character_name, 'gold', -merch['Map'])
+                character_inventory.add_item(character_name, 'map', 1)
+                user_inventory = character_inventory.get_inventory(character_name)
+            else:
+                print('\tI am sorry fellow Adventurer but you do not have enough!')
+                print("\tPerhaps you should gather more gold and try again.")
+            time.sleep(3)
+        elif choice == 0:
+            tools.prompt_clear()
+            break
+        tools.prompt_clear()

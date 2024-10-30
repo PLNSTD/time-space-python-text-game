@@ -5,18 +5,19 @@ from utils import tools
 import time
 
 def options(character_name):
-    print('''\n\tA biting chill wraps around you
-          \tas snowflakes drift through the still air.
-          \tEach step crunches softly,
-          \tbreaking the eerie silence of this frozen realm.''')
-    print('''The ground trembles as figures of ice rise from the snow,
-          eyes glowing with an eerie blue light.
-          'You do not belong here,' they rumble, advancing slowly.
-          'Leave… or be frozen in time.''')
+    print("You step into an endless sea of sand, heat waves rippling across the horizon.\n"
+      "\tThe sun blazes overhead, casting harsh shadows that shift with the wind.\n"
+      "\tEach step sinks into the golden dunes, and the air is thick with silence,\n"
+      "\tbroken only by the occasional whisper of the desert breeze.")
+    print("From the shadows, figures emerge with wicked grins and glinting blades.\n"
+      "\tA leader steps forward, sneering:\n"
+      "\t'Well, well, what do we have here?\n"
+      "\t\tA wandering soul in our territory?'\n"
+      "\t'Hand over your valuables, and you might leave with your skin intact!'")
     user_inventory = character_inventory.get_inventory(character_name)
     mob_spawned_quantity = random.randint(1,4)
-    enemies = {'name': 'Ice Golem', 'quantity': mob_spawned_quantity,'attack': 2, 'weaknesses': ['fire'], 'resistances': ['ice', 'physical'], 'health': [40] * mob_spawned_quantity, 'drops_key': False}
-    if user_inventory.get('key_seed') == 'snow':
+    enemies = {'name': 'Bandit', 'quantity': mob_spawned_quantity,'attack': 3, 'weaknesses': ['fire'], 'resistances': ['light'], 'health': [30] * mob_spawned_quantity, 'drops_key': False}
+    if user_inventory.get('key_seed') == 'sand':
         enemies['drops_key'] = True
     print(f'\n\t{mob_spawned_quantity} {enemies['name']}{'s' if mob_spawned_quantity > 1 else ''} spawned!')
     time.sleep(2)

@@ -49,7 +49,7 @@ def get_character(name):
 def character_creation(name):
     name = name.lower()
     seed = ['snow', 'cave', 'sand']
-    character_profile = {'name': name, 'level': 1, 'skills': {'health': 1, 'agility': 1, 'magic': 1, 'speech': 1}, 'stats': {'health': 25, 'mana': 10, 'xp': 0, 'attack': 10}, 'inventory': {'key_seed': rooms_seed[seed[random.randint(1,3)]]}}
+    character_profile = {'name': name, 'level': 1, 'skills': {'health': 1, 'agility': 1, 'magic': 1, 'speech': 1}, 'stats': {'health': 25, 'mana': 10, 'xp': 0, 'attack': 10}, 'inventory': {'key_seed': seed[random.randint(0,2)], 'gold': 0}}
     data_profiles = {}
     with open(saves_file_path, 'r') as saves_file:
         data_profiles = json.load(saves_file)
