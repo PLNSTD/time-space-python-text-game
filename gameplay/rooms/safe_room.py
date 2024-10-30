@@ -83,17 +83,18 @@ def talk_to_merchant():
                             character_inventory.add_item(character_name, 'gold', -50)
                             user_inventory = character_inventory.get_inventory(character_name)
                             # Advice based on room
-                            room_seed = user_inventory['ending_note']
-                            if room_seed == 1:
+                            room_seed = user_inventory['key_seed']
+                            if room_seed == 'snow':
                                 pass
-                            elif room_seed == 2:
+                            elif room_seed == 'cave':
                                 pass
-                            elif room_seed == 3:
+                            elif room_seed == 'sand':
                                 pass
                         elif choice == 2:
                             break
                     else:
-                        print("\n\tIt appears you lack the necessary 50 gold to persuade the Merchant. Perhaps you should gather more gold and try again.")
+                        print("\n\tIt appears you lack the necessary 50 gold to persuade the Merchant")
+                        print("\tPerhaps you should gather more gold and try again.")
                         time.sleep(2)
                         break
         elif choice == 0:

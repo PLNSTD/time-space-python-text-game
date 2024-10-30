@@ -22,10 +22,10 @@ def options(character_name):
         choice = tools.get_player_input_choice()
         if choice == 1:
             print('\n\tNote:')
-            print('\n\tYou did not found the key yet!\n\tAsk to the Merchant in any room for guidance')
+            print('\n\tYou did not found the key yet!\n\tAsk to the Merchant in any safe room for guidance')
             note_read = True
         elif choice == 0:
             break
         tools.prompt_clear()
     if note_read and user_inventory.get('ending_note', None) == None:
-        character_inventory.add_item(character_name, 'ending_note', random.randint(1,3))
+        character_inventory.add_item(character_name, 'ending_note', True)

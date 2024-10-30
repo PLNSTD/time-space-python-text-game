@@ -1,6 +1,7 @@
 import os
 import time
 import json
+import random
 from utils.custom_exceptions import ExitWithBlock
 
 current_file_path = os.path.abspath(__file__)
@@ -46,7 +47,8 @@ def get_character(name):
 # CREATES A CHARACTER BY NAME (NO CHECKING FOR DUPLICATES)
 def character_creation(name):
     name = name.lower()
-    character_profile = {'name': name, 'level': 1, 'skills': {'health': 1, 'agility': 1, 'magic': 1, 'speech': 1}, 'stats': {'health': 25, 'mana': 10, 'xp': 0, 'attack': 5}}
+    seed = ['snow', 'cave', 'sand']
+    character_profile = {'name': name, 'level': 1, 'skills': {'health': 1, 'agility': 1, 'magic': 1, 'speech': 1}, 'stats': {'health': 25, 'mana': 10, 'xp': 0, 'attack': 5}, 'inventory': {'key_seed': seed[random.randint(1,3)]}}
     data_profiles = {}
     with open(saves_file_path, 'r') as saves_file:
         data_profiles = json.load(saves_file)

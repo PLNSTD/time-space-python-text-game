@@ -8,7 +8,7 @@ def print_inventory(character_name):
     user_inventory = get_inventory(character_name)
     print('\nInventory:')
     for item in user_inventory:
-        if item == 'ending_note':
+        if item == 'ending_note' or item == 'key_seed ':
             continue
         print(f"\n\tItem: {item.capitalize()}")
         print(f"\n\tQt: {user_inventory[item]}")
