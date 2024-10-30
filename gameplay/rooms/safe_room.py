@@ -31,9 +31,10 @@ def options(user_name):
             while True:
                 print(f"This is your inventory and stats")
                 # Show Inventory and Stats
-                character_stats.print_stats(character_name)
+                user_stats = character_stats.get_stats(character_name)
+                character_stats.print_stats(user_stats)
                 user_inventory = character_inventory.get_inventory(character_name)
-                character_inventory.print_inventory()
+                character_inventory.print_inventory(user_inventory)
                 heal_enabled = False
                 if user_inventory.get('potion', 0) > 0:
                     heal_enabled = True

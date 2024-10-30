@@ -4,8 +4,7 @@ import time
 
 saves_file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'characters', 'data.json')
 
-def print_inventory(character_name):
-    user_inventory = get_inventory(character_name)
+def print_inventory(user_inventory):
     print('\nInventory:')
     for item in user_inventory:
         if item == 'ending_note' or item == 'key_seed ':
@@ -34,7 +33,7 @@ def add_item(character_name, item_name, quantity=1):
     if character_info.get('inventory', None) == None:
         character_info['inventory'] = {item_name: quantity}
     else:
-        if item_name is not 'ending_note':
+        if item_name not in ['ending_note', 'ending_key']:
             character_info['inventory'][item_name] = character_info['inventory'].get(item_name, 0) + quantity
         else:
             character_info['inventory'][item_name] = quantity

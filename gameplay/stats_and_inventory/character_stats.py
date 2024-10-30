@@ -3,9 +3,7 @@ import json
 
 saves_file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'characters', 'data.json')
 
-def print_stats(character_name):
-    user_stats = get_stats(character_name)
-    
+def print_stats(user_stats):
     print('\nStats:')
     for stat in user_stats:
         print(f'\t{stat}: {user_stats[stat]}')
