@@ -62,7 +62,10 @@ def fight(character_name, enemies):
         for enemy in range(1, enemies['quantity'] + 1):
             if random.randint(1, tot_enemies * 5) > tot_enemies * 3:
                 damage_received += enemies['attack']
-        character_stats.set_health(user_name, -damage_received)
+            else:
+                print('You avoided one attack')
+        if damage_received > 0:
+            character_stats.set_health(user_name, -damage_received)
         print(f'\nYou received {damage_received} total damage')
         if character_stats.get_stats(character_name)['health'] <= 0:
             print('Game Over... You died!')
@@ -71,7 +74,6 @@ def fight(character_name, enemies):
             exit()
     drops(tot_enemies, True if enemies['drops_key'] else False)
     tools.prompt_clear()
-
 
 def print_enemies(enemies):
     for enemy_num in range(enemies['quantity']):

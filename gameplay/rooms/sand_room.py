@@ -5,14 +5,14 @@ from utils import tools
 import time
 
 def options(character_name):
-    print("You step into an endless sea of sand, heat waves rippling across the horizon.\n"
+    print("\tYou step into an endless sea of sand, heat waves rippling across the horizon.\n"
       "\tThe sun blazes overhead, casting harsh shadows that shift with the wind.\n"
       "\tEach step sinks into the golden dunes, and the air is thick with silence,\n"
       "\tbroken only by the occasional whisper of the desert breeze.")
-    print("From the shadows, figures emerge with wicked grins and glinting blades.\n"
+    print("\n\tFrom the shadows, figures emerge with wicked grins and glinting blades.\n"
       "\tA leader steps forward, sneering:\n"
       "\t'Well, well, what do we have here?\n"
-      "\t\tA wandering soul in our territory?'\n"
+      "\tA wandering soul in our territory?'\n"
       "\t'Hand over your valuables, and you might leave with your skin intact!'")
     user_inventory = character_inventory.get_inventory(character_name)
     mob_spawned_quantity = random.randint(1,4)

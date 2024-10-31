@@ -9,10 +9,10 @@ def options(character_name):
           \tas snowflakes drift through the still air.
           \tEach step crunches softly,
           \tbreaking the eerie silence of this frozen realm.''')
-    print('''The ground trembles as figures of ice rise from the snow,
-          eyes glowing with an eerie blue light.
-          'You do not belong here,' they rumble, advancing slowly.
-          'Leave… or be frozen in time.''')
+    print('''\n\tThe ground trembles as figures of ice rise from the snow,
+          \teyes glowing with an eerie blue light.
+          \t'You do not belong here,' they rumble, advancing slowly.
+          \t'Leave… or be frozen in time.''')
     user_inventory = character_inventory.get_inventory(character_name)
     mob_spawned_quantity = random.randint(1,4)
     enemies = {'name': 'Ice Golem', 'quantity': mob_spawned_quantity,'attack': 2, 'weaknesses': ['fire'], 'resistances': ['ice', 'physical'], 'health': [40] * mob_spawned_quantity, 'drops_key': False}

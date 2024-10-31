@@ -5,11 +5,11 @@ from utils import tools
 import time
 
 def options(character_name):
-    print("You step into the cave, and a damp chill settles over you.\n\t"
+    print("\tYou step into the cave, and a damp chill settles over you.\n\t"
       "Shadows twist and crawl along the rough stone walls,\n\t"
       "while distant echoes hint at unseen depths.\n\t"
       "The air is thick and still, broken only by the faint drip of water somewhere in the darkness.")
-    print("Bones clatter in the darkness, assembling into twisted forms.\n"
+    print("\n\tBones clatter in the darkness, assembling into twisted forms.\n"
       "\tA hollow voice echoes through the shadows:\n"
       "\t'The dead do not rest... and neither shall you.'\n"
       "\tSkeletons rise, their empty eyes fixed upon you, ready to attack.")
