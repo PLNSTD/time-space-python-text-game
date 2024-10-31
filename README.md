@@ -109,7 +109,7 @@
 >
 > # ToDo LIST
 >
-> FIXED: room indexes. Need to implement user movement between rooms. Try to explore the map and show it on terminal on each step
+> Finished NEED TO improve story
 >
 > 1. [x] Virtual environment Creation
 > 1. [x] Character Creation
@@ -127,3 +127,9 @@
 >    1. [x] Elements
 >    1. [x] Ultimate
 > 1. [x] LOSE conditions
+
+You can recreate the environment with
+
+```
+pip install -r requirements.txt
+```
