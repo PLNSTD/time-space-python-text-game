@@ -131,5 +131,13 @@
 You can recreate the environment with
 
 ```
-pip install -r requirements.txt
+mkdir my_new_project          # Create a new project directory
+cd my_new_project             # Navigate into the directory
+python -m venv venv           # Create a virtual environment
+.\venv\Scripts\activate        # Activate on Windows
+# or
+source venv/bin/activate      # Activate on macOS/Linux
+pip install -r requirements.txt # Install dependencies
+pip freeze                    # Verify installation (optional)
+deactivate                    # Deactivate when done
 ```
